@@ -72,16 +72,16 @@ function startMemoryMenu() {
 
 
                     <!-- CARD 4: PAPA'S GYAAN PUZZLE -->
-                    <button class="memory-card memories-card" type="button">
-                        <div class="memory-card-icon">🧩</div>
+<button class="memory-card memories-card" type="button" onclick="startPapaGyaanScene()">
+    <div class="memory-card-icon">🧩</div>
 
-                        <div class="memory-card-text">
-                            <h2>Unlock Papa’s Gyaan</h2>
-                            <p>Solve the puzzle to unlock his unlimited wisdom.</p>
-                        </div>
+    <div class="memory-card-text">
+        <h2>Unlock Papa’s Gyaan</h2>
+        <p>Solve the puzzle to unlock his unlimited wisdom.</p>
+    </div>
 
-                        <span class="memory-card-arrow">→</span>
-                    </button>
+    <span class="memory-card-arrow">→</span>
+</button>
 
 
                     <!-- CARD 5: FAMILY QUIZ -->
