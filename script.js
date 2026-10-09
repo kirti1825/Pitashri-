@@ -52,8 +52,9 @@ enterButton.addEventListener("click", () => {
 
                 <!-- BOY -->
                 <div class="character">
-                    <BackgroundEraser_20261007_104347177.png" alt="">
-                </div>
+    <img src="BackgroundEraser_20261007_104347177.png" alt="Papa">
+</div>
+                
 
                 <!-- BIG WOODEN GATE -->
                 <div class="gate-area">
