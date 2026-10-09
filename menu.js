@@ -141,13 +141,10 @@ function startMemoryMenu() {
         openPapaSection("startPapaGyaanPuzzleScene", "Unlock Papa's Gyaan");
     });
 
-    document.querySelector(".voice-card").addEventListener("click", () => {
-        openPapaSection("startPapaFamilyQuizScene", "Papa vs. The Family Quiz");
-    });
-
+document.querySelector(".voice-card").addEventListener("click", () => {
+    openPapaSection("startPapaFamilyQuizScene", "Papa vs. The Family Quiz");
+});
 }
-
-
 /* =========================================
    MEMORY MENU STYLES
    ========================================= */
