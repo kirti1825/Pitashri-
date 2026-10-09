@@ -142,7 +142,7 @@ document
     .addEventListener("click", () => {
         startMemoryMenu();
     });
-
+}
 /* =========================================
    PAPA PROFILE STYLES
    ========================================= */
