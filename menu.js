@@ -130,8 +130,8 @@ function startMemoryMenu() {
     });
 
     document.querySelector(".quiz-card").addEventListener("click", () => {
-        openPapaSection("startPapaScrapbookScene", "Papa Through the Years");
-    });
+    openPapaSection("startPapaScrapbook", "Papa Through the Years");
+});
 
     document.querySelector(".movie-card").addEventListener("click", () => {
     document.activeElement?.blur();
