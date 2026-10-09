@@ -1612,7 +1612,7 @@ touch-action: manipulation;
 }
 
 .family-didi {
-    right: 15%;
+    right: 10%;
 }
 
 /* MOBILE */
@@ -1640,7 +1640,7 @@ touch-action: manipulation;
     }
 
     .family-didi {
-        right: 12%;
+        right: 6%;
     }
 }
 
@@ -1649,7 +1649,7 @@ touch-action: manipulation;
 
 .party-table {
     position: absolute;
-    left: 52%;
+    left: 47%;
     bottom: 8%;
     width: 180px;
     height: 125px;
