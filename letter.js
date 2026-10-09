@@ -127,14 +127,21 @@ function startPapaProfileScene() {
                     OUR VERY OWN SUPERHERO
                     <span>✧</span>
                 </footer>
+                <button class="papa-back-button" type="button">
+    ← Back to Menu
+</button>
 
             </main>
         </section>
     `;
 
     addPapaProfileStyles();
-}
 
+document
+    .querySelector(".papa-back-button")
+    .addEventListener("click", () => {
+        startMemoryMenu();
+    });
 
 /* =========================================
    PAPA PROFILE STYLES
@@ -539,12 +546,52 @@ function addPapaProfileStyles() {
             animation: papaHeadingEnter 1.2s ease both;
         }
 
-        .papa-profile-footer span {
-            color: #fde68a;
-            animation: papaSparklePulse 2s ease-in-out infinite;
-        }
+        
+.papa-profile-footer span {
+    color: #fde68a;
+    animation: papaSparklePulse 2s ease-in-out infinite;
+}
 
-        /* ANIMATIONS */
+/* BACK TO MENU BUTTON */
+
+.papa-back-button {
+    display: block;
+    margin: 26px auto 8px;
+    padding: 12px 24px;
+    border: 1px solid rgba(249, 168, 212, .45);
+    border-radius: 30px;
+    background: linear-gradient(
+        135deg,
+        rgba(249, 168, 212, .15),
+        rgba(196, 181, 253, .12)
+    );
+    color: #f9d7eb;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
+}
+
+.papa-back-button:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(
+        135deg,
+        rgba(249, 168, 212, .28),
+        rgba(196, 181, 253, .25)
+    );
+    box-shadow: 0 0 18px rgba(249, 168, 212, .15);
+}
+
+.papa-back-button:active {
+    transform: scale(.97);
+}
+
+/* ANIMATIONS */
+
 
         @keyframes papaStarsDrift {
             from {
