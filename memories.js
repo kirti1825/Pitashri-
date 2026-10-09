@@ -686,5 +686,22 @@ body.pg-gyaan-active iframe[src*="youtube.com"] {
       }
     `;
 
+
     document.head.appendChild(style);
 }
+// Pause background music while a Papa voice note plays
+document.addEventListener("play", function (event) {
+    if (event.target.matches("#papaGyaanScene .pg-voice-panel audio")) {
+        pauseBackgroundMusic();
+    }
+}, true);
+
+// Resume background music when a Papa voice note is paused or ends
+function handlePapaVoiceNoteStop(event) {
+    if (event.target.matches("#papaGyaanScene .pg-voice-panel audio")) {
+        resumeBackgroundMusic();
+    }
+}
+
+document.addEventListener("pause", handlePapaVoiceNoteStop, true);
+document.addEventListener("ended", handlePapaVoiceNoteStop, true);
