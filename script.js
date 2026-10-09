@@ -1083,7 +1083,7 @@ document.querySelectorAll(".lantern").forEach(lantern => {
     if (document.querySelector(".party-scene")) {
         startScorecardScene(poppedLanterns, totalLanterns);
     }
-}, 17000);
+}, 22000);
 
     /* THE WHOLE FAMILY APPEARS */
 document.querySelectorAll(".family-member").forEach((member, index) => {
@@ -1105,7 +1105,7 @@ document.querySelectorAll(".family-member").forEach((member, index) => {
             confetti.classList.add("confetti-blast");
         }
 
-    }, 27000);
+    }, 12000);
 
 
     /*
