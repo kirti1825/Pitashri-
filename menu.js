@@ -89,8 +89,8 @@ function startMemoryMenu() {
                         <div class="memory-card-icon">🐱</div>
 
                         <div class="memory-card-text">
-                            <h2>Papa vs. The Family Quiz</h2>
-                            <p>Let’s see how well Papa knows his own family!</p>
+                            <h2>Scratch, Win & Play</h2>
+                            <p>A playful little scratch game!</p>
                         </div>
 
                         <span class="memory-card-lock">🔐</span>
