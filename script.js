@@ -1926,6 +1926,7 @@ touch-action: manipulation;
         filter: blur(20px);
 
         z-index: 7;
+        }
         .party-glow {
     position: absolute;
     width: 100%;
