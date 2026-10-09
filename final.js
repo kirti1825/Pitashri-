@@ -56,9 +56,7 @@ function startPapaFamilyQuizScene() {
         <button id="scratchContinue" class="scratch-continue" hidden>
           Continue, Papa! 🐾 →
         </button>
-        <button class="back-menu-btn" onclick="startMemoryMenu()">
-    ← Back to Menu
-</button>
+        
       </main>
     </section>
   `;
@@ -268,6 +266,9 @@ function showPapaCatFinale() {
         </p>
 
         <div class="cat-stamp">मेहनताना तो बनता है! ✨</div>
+        <button class="back-menu-btn" onclick="startMemoryMenu()">
+  🏡 Back to Menu
+</button>
       </main>
     </section>
   `;
