@@ -226,6 +226,29 @@ function startPapaScrapbook() {
                     height: 140px;
                 }
             }
+            html:has(.papa-scrapbook),
+body:has(.papa-scrapbook) {
+    overflow: hidden !important;
+}
+
+#birthdayAnimation:has(.papa-scrapbook) {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#birthdayAnimation:has(.papa-scrapbook) .papa-scrapbook {
+    min-height: 0 !important;
+    padding-bottom: 24px !important;
+    overflow: visible !important;
+}
         </style>
     `;
 
