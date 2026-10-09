@@ -663,6 +663,15 @@ function addPapaGyaanStyles() {
         0%, 100% { transform: scale(1); }
         50% { transform: scale(1.12); }
       }
+      body.pg-gyaan-active #youtubePlayer,
+body.pg-gyaan-active #youtube-player,
+body.pg-gyaan-active .youtube-player,
+body.pg-gyaan-active .youtube-container,
+body.pg-gyaan-active iframe[src*="youtube.com"] {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
 
       @media (prefers-reduced-motion: reduce) {
         #papaGyaanScene *,
@@ -673,15 +682,7 @@ function addPapaGyaanStyles() {
           transition-duration: .01ms !important;
           scroll-behavior: auto !important;
         }
-        body.pg-gyaan-active #youtubePlayer,
-body.pg-gyaan-active #youtube-player,
-body.pg-gyaan-active .youtube-player,
-body.pg-gyaan-active .youtube-container,
-body.pg-gyaan-active iframe[src*="youtube.com"] {
-    display: none !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-}
+      
       }
     `;
 
