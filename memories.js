@@ -134,7 +134,7 @@ function startPapaGyaanScene() {
         </div>
       </section>
     `;
-
+document.body.classList.add("pg-gyaan-active");
     addPapaGyaanStyles();
     startPapaHorizontalPuzzle();
 }
@@ -673,6 +673,15 @@ function addPapaGyaanStyles() {
           transition-duration: .01ms !important;
           scroll-behavior: auto !important;
         }
+        body.pg-gyaan-active #youtubePlayer,
+body.pg-gyaan-active #youtube-player,
+body.pg-gyaan-active .youtube-player,
+body.pg-gyaan-active .youtube-container,
+body.pg-gyaan-active iframe[src*="youtube.com"] {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
       }
     `;
 
