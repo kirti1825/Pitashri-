@@ -1865,55 +1865,6 @@ function addPartyStyles() {
     z-index: 2;
 }
 
-.lantern {
-    position: absolute;
-    bottom: -100px;
-    width: 30px;
-    height: 42px;
-    border-radius: 45% 45% 40% 40%;
-    background: linear-gradient(to bottom, #ffd98a, #ff9d58);
-    box-shadow: 0 0 22px rgba(255, 180, 100, 0.8);
-    animation: lanternFloat linear infinite;
-    z-index: 4;
-}
-
-.lantern::before {
-    content: "";
-    position: absolute;
-    top: -7px;
-    left: 8px;
-    width: 14px;
-    height: 7px;
-    border-radius: 50%;
-    background: #ffd58a;
-}
-
-.lantern::after {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    left: 10px;
-    width: 10px;
-    height: 6px;
-    border-radius: 50%;
-    background: #ffb45c;
-}
-
-.lantern1  { left:4%;  animation-duration:18s; animation-delay:1s; }
-.lantern2  { left:10%; animation-duration:13s; animation-delay:6s; }
-.lantern3  { left:17%; animation-duration:16s; animation-delay:3s; }
-.lantern4  { left:24%; animation-duration:12s; animation-delay:8s; }
-.lantern5  { left:31%; animation-duration:17s; animation-delay:2s; }
-.lantern6  { left:38%; animation-duration:14s; animation-delay:7s; }
-.lantern7  { left:45%; animation-duration:19s; animation-delay:4s; }
-.lantern8  { left:52%; animation-duration:15s; animation-delay:9s; }
-.lantern9  { left:59%; animation-duration:13s; animation-delay:5s; }
-.lantern10 { left:66%; animation-duration:18s; animation-delay:2s; }
-.lantern11 { left:73%; animation-duration:14s; animation-delay:10s; }
-.lantern12 { left:80%; animation-duration:17s; animation-delay:6s; }
-.lantern13 { left:86%; animation-duration:12s; animation-delay:3s; }
-.lantern14 { left:91%; animation-duration:16s; animation-delay:8s; }
-.lantern15 { left:96%; animation-duration:19s; animation-delay:5s; }
 
 .party-character {
     position: absolute;
