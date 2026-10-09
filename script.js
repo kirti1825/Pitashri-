@@ -1562,7 +1562,8 @@ touch-action: manipulation;
     }
 
 
-    /* =========================
+
+/* =========================
    FAMILY BEHIND THE CAKE
 ========================= */
 
@@ -1571,7 +1572,7 @@ touch-action: manipulation;
     left: 50%;
     bottom: 8%;
     width: 100%;
-    height: 360px;
+    height: 440px;
     transform: translateX(-50%);
     z-index: 10;
 }
@@ -1580,27 +1581,32 @@ touch-action: manipulation;
     position: absolute;
     bottom: 0;
     width: 34%;
-    max-height: 340px;
+    max-height: 420px;
     object-fit: contain;
     object-position: bottom center;
     opacity: 0;
     transform: translateY(35px);
     transition: opacity 1.2s ease, transform 1.2s ease;
 }
+
 .family-member.family-show {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* YOU — LEFT */
 .family-me {
-    left: 2%;
+    left: -1%;
 }
 
+/* MUMMY — CLOSER TO YOU */
 .family-mummy {
-    left: 26%;
+    left: 19%;
 }
 
+/* PAPA — CLOSER TO DIDI */
 .family-papa {
-    left: 50%;
+    left: 59%;
     transform: translate(-50%, 35px);
 }
 
@@ -1608,38 +1614,44 @@ touch-action: manipulation;
     transform: translate(-50%, 0);
 }
 
+/* DIDI — RIGHT */
 .family-didi {
-    right: 2%;
+    right: -1%;
 }
+
+/* =========================
+   MOBILE SCREEN
+========================= */
 
 @media (max-width: 600px) {
     .party-characters {
-        width: 98%;
-        height: 230px;
+        width: 100%;
+        height: 350px;
         bottom: 8%;
     }
 
     .family-member {
-        width: 25%;
-        max-height: 220px;
+        width: 34%;
+        max-height: 340px;
     }
 
     .family-me {
-        left: 0;
+        left: -1%;
     }
 
     .family-mummy {
-        left: 25%;
+        left: 18%;
     }
 
     .family-papa {
-        left: 50%;
+        left: 59%;
     }
 
     .family-didi {
-        right: 0;
+        right: -1%;
     }
 }
+
 
 
     /* =========================
