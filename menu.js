@@ -133,8 +133,8 @@ function startMemoryMenu() {
     openPapaSection("startPapaScrapbook", "Papa Through the Years");
 });
 
-    document.querySelector(".movie-card").addEventListener("click", () => {
-    document.activeElement?.blur();
+    document.querySelector(".movie-card").addEventListener("click", (event) => {
+    event.currentTarget.blur();
 });
 
     document.querySelector(".memories-card").addEventListener("click", () => {
