@@ -1,290 +1,313 @@
 
 function startPapaScrapbook() {
-  const screen = document.getElementById("birthdayAnimation");
-  if (!screen) return;
+    const screen = document.getElementById("birthdayAnimation");
+    if (!screen) return;
 
-  const photos = [
-    "IMG_20261009_164236_022~2.jpg",
-    "IMG_20261009_170119_571~2.jpg",
-    "IMG_20261009_170223_356~2.jpg",
-    "IMG_20261009_170249_237~2.jpg",
-    "IMG_20261009_170457_854~2.jpg",
-    "IMG_20261009_170531_260~2.jpg",
-    "IMG_20261009_170756_427~2.jpg",
-    "IMG_20261009_172247_204~2.jpg"
-  ];
+    const photos = [
+        "IMG_20261009_164236_022~2.jpg",
+        "IMG_20261009_170119_571~2.jpg",
+        "IMG_20261009_170223_356~2.jpg",
+        "IMG_20261009_170249_237~2.jpg",
+        "IMG_20261009_170457_854~2.jpg",
+        "IMG_20261009_170531_260~2.jpg",
+        "IMG_20261009_170756_427~2.jpg",
+        "IMG_20261009_172247_204~2.jpg"
+    ];
 
-  let page = 0;
+    let page = -1;
 
-  screen.innerHTML = `
-    <section id="papaScrapbook">
-      <div class="sb-book">
-        <div class="sb-cover" id="sbCover">
-          <div class="sb-cover-decoration">♡ ✿ ♡</div>
-          <div class="sb-cover-title">Scrapbook</div>
-          <div class="sb-cover-subtitle">little pieces of lovely memories</div>
-          <button id="sbOpen" class="sb-button">Open book ✨</button>
-        </div>
+    screen.innerHTML = `
+        <section id="papaScrapbook">
+            <button id="sbBack" type="button">← Back to Menu</button>
 
-        <div class="sb-inside" id="sbInside" hidden>
-          <div class="sb-page" id="sbPage"></div>
-          <div class="sb-controls">
-            <button class="sb-button" id="sbPrev">← Previous</button>
-            <span id="sbCounter">1 / 8</span>
-            <button class="sb-button" id="sbNext">Next →</button>
-          </div>
-        </div>
-      </div>
+            <div class="sb-book" id="sbBook">
+                <div class="sb-cover">
+                    <div class="sb-cover-decoration">✦ ❀ ✦</div>
+                    <div class="sb-cover-title">Our Little<br>Scrapbook</div>
+                    <div class="sb-cover-subtitle">A book full of Papa 💗</div>
+                    <div class="sb-cover-flower">❀</div>
+                    <button id="sbOpen" type="button">Open the Book ♡</button>
+                </div>
 
-      <button class="sb-menu-button" id="sbBack">← Back to Menu</button>
-    </section>
-  `;
+                <div class="sb-page" id="sbPage" hidden>
+                    <img id="sbPhoto" alt="A special family memory">
+                    <div class="sb-page-number" id="sbPageNumber"></div>
+                    <button class="sb-arrow sb-prev" id="sbPrev"
+                        type="button" aria-label="Previous photo">‹</button>
+                    <button class="sb-arrow sb-next" id="sbNext"
+                        type="button" aria-label="Next photo">›</button>
+                </div>
+            </div>
 
-  addScrapbookStyles();
-
-  const cover = document.getElementById("sbCover");
-  const inside = document.getElementById("sbInside");
-  const pageBox = document.getElementById("sbPage");
-  const counter = document.getElementById("sbCounter");
-  const prev = document.getElementById("sbPrev");
-  const next = document.getElementById("sbNext");
-
-  function renderPage(animate = false) {
-    pageBox.classList.remove("sb-turn");
-    void pageBox.offsetWidth;
-
-    const photo = photos[page];
-
-    pageBox.innerHTML = `
-      <div class="sb-paper">
-        <div class="sb-tape"></div>
-        <div class="sb-photo-frame">
-          <img src="${photo}" alt="Scrapbook memory"
-               onerror="this.alt='Photo could not load'; this.style.display='none';">
-        </div>
-        <div class="sb-heart-doodle">♡ ✿ ♡</div>
-      </div>
+            <div class="sb-controls" id="sbControls" hidden>
+                <span id="sbCount"></span>
+                <button id="sbClose" type="button">Close Book</button>
+            </div>
+        </section>
     `;
 
-    if (animate) pageBox.classList.add("sb-turn");
+    addScrapbookStyles();
 
-    counter.textContent = `${page + 1} / ${photos.length}`;
-    prev.disabled = page === 0;
-    next.disabled = page === photos.length - 1;
-  }
+    const book = document.getElementById("sbBook");
+    const cover = book.querySelector(".sb-cover");
+    const photoPage = document.getElementById("sbPage");
+    const photo = document.getElementById("sbPhoto");
+    const controls = document.getElementById("sbControls");
 
-  document.getElementById("sbOpen").addEventListener("click", () => {
-    cover.classList.add("sb-cover-open");
-    window.setTimeout(() => {
-      cover.hidden = true;
-      inside.hidden = false;
-      renderPage();
-    }, 550);
-  });
+    function showPhoto(index) {
+        page = Math.max(0, Math.min(index, photos.length - 1));
 
-  prev.addEventListener("click", () => {
-    if (page > 0) {
-      page--;
-      renderPage(true);
+        photo.style.opacity = "0";
+
+        window.setTimeout(() => {
+            photo.src = photos[page];
+            photo.style.opacity = "1";
+        }, 100);
+
+        document.getElementById("sbPageNumber").textContent =
+            `${page + 1} / ${photos.length}`;
+
+        document.getElementById("sbCount").textContent =
+            `Memory ${page + 1} of ${photos.length}`;
+
+        document.getElementById("sbPrev").disabled = page === 0;
+        document.getElementById("sbNext").disabled =
+            page === photos.length - 1;
     }
-  });
 
-  next.addEventListener("click", () => {
-    if (page < photos.length - 1) {
-      page++;
-      renderPage(true);
+    function openBook() {
+        cover.hidden = true;
+        photoPage.hidden = false;
+        controls.hidden = false;
+        book.classList.add("sb-book-open");
+        showPhoto(0);
     }
-  });
 
-  document.getElementById("sbBack").addEventListener("click", () => {
-    startMemoryMenu();
-  });
+    function closeBook() {
+        photoPage.hidden = true;
+        controls.hidden = true;
+        cover.hidden = false;
+        book.classList.remove("sb-book-open");
+        page = -1;
+    }
+
+    document.getElementById("sbOpen").addEventListener("click", openBook);
+
+    document.getElementById("sbPrev").addEventListener("click", () => {
+        if (page > 0) showPhoto(page - 1);
+    });
+
+    document.getElementById("sbNext").addEventListener("click", () => {
+        if (page < photos.length - 1) showPhoto(page + 1);
+    });
+
+    document.getElementById("sbClose").addEventListener("click", closeBook);
+
+    document.getElementById("sbBack").addEventListener("click", () => {
+        if (typeof startMemoryMenu === "function") {
+            startMemoryMenu();
+        }
+    });
 }
 
 function addScrapbookStyles() {
-  if (document.getElementById("sbStyles")) return;
+    let oldStyle = document.getElementById("papaScrapbookStyles");
+    if (oldStyle) oldStyle.remove();
 
-  const style = document.createElement("style");
-  style.id = "sbStyles";
-  style.textContent = `
-    #papaScrapbook {
-      min-height: 100vh;
-      padding: 28px 14px 35px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 25px;
-      background:
-        radial-gradient(ellipse at top, #fff4d9, transparent 65%),
-        linear-gradient(145deg, #f8e8d5, #ead7c4);
-      color: #68483d;
-      font-family: Georgia, serif;
-      text-align: center;
-    }
+    const style = document.createElement("style");
+    style.id = "papaScrapbookStyles";
 
-    #papaScrapbook * { box-sizing: border-box; }
+    style.textContent = `
+        #papaScrapbook {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            width: 100%;
+            height: 100%;
+            height: 100dvh;
+            overflow: hidden;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background:
+                radial-gradient(ellipse at top, #51354f, #21182c 60%, #100e19);
+            color: #fff5f8;
+            font-family: Georgia, serif;
+            padding: 12px;
+            padding-top: max(12px, env(safe-area-inset-top));
+            padding-bottom: max(12px, env(safe-area-inset-bottom));
+        }
 
-    #papaScrapbook .sb-book {
-      width: min(100%, 390px);
-      min-height: 490px;
-      position: relative;
-      perspective: 1400px;
-      border-radius: 8px 18px 18px 8px;
-      background: #6e4433;
-      padding: 10px 10px 10px 17px;
-      box-shadow: 0 18px 35px #67412c45;
-    }
+        #papaScrapbook * {
+            box-sizing: border-box;
+        }
 
-    #papaScrapbook .sb-cover {
-      min-height: 470px;
-      padding: 35px 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 22px;
-      border: 3px double #d8b47d;
-      border-radius: 4px 14px 14px 4px;
-      color: #f9e8c5;
-      background:
-        radial-gradient(circle at 20% 20%, #ffffff16 0 2px, transparent 3px),
-        linear-gradient(135deg, #8c6045, #573829);
-      transform-origin: left center;
-      transition: transform .6s ease, opacity .4s ease;
-    }
+        #papaScrapbook button {
+            font: inherit;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
 
-    #papaScrapbook .sb-cover-decoration {
-      font-size: 35px;
-      color: #e9c99a;
-    }
+        #papaScrap #sbBack {
+            align-self: flex-start;
+            flex: 0 0 auto;
+            border: 1px solid #f3c9db88;
+            border-radius: 22px;
+            padding: 10px 16px;
+            background: #241725;
+            color: #fff4fa;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
 
-    #papaScrapbook .sb-cover-title {
-      font-size: clamp(36px, 10vw, 49px);
-      line-height: 1.1;
-      font-style: italic;
-    }
+        #papaScrap .sb-book {
+            position: relative;
+            flex: 1 1 auto;
+            min-height: 0;
+            width: min(100%, 650px);
+            max-height: 100%;
+            border: 3px solid #b77a57;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #492b31;
+            box-shadow: 0 8px 28px #0008;
+        }
 
-    #papaScrapbook .sb-cover-subtitle {
-      font-size: 13px;
-      line-height: 1.6;
-      color: #f3d9b4;
-    }
+        #papaScrap .sb-cover {
+            width: 100%;
+            height: 100%;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 22px;
+            text-align: center;
+            padding: 20px;
+            background:
+                radial-gradient(circle at 50% 40%, #81535b, #492b31 72%);
+            border: 8px double #d9ad80;
+        }
 
-    #papaScrapbook .sb-cover-open {
-      transform: rotateY(-105deg);
-      opacity: 0;
-    }
+        #papaScrap .sb-cover-decoration {
+            color: #f6d5ac;
+            font-size: 24px;
+            letter-spacing: 7px;
+        }
 
-    #papaScrapbook .sb-inside {
-      min-height: 470px;
-      padding: 12px;
-      background: #f5e8d0;
-      border-radius: 4px 12px 12px 4px;
-    }
+        #papaScrap .sb-cover-title {
+            font-size: clamp(34px, 8vw, 58px);
+            line-height: 1.12;
+            color: #fff0d8;
+            text-shadow: 0 3px 12px #160b15;
+        }
 
-    #papaScrapbook .sb-page {
-      transform-origin: left center;
-    }
+        #papaScrap .sb-cover-subtitle {
+            font-size: 16px;
+            color: #f8dce6;
+        }
 
-    #papaScrapbook .sb-turn {
-      animation: sbPageTurn .45s ease both;
-    }
+        #papaScrap .sb-cover-flower {
+            font-size: 40px;
+            color: #f5c6d7;
+        }
 
-    #papaScrapbook .sb-paper {
-      min-height: 410px;
-      padding: 24px 15px 18px;
-      position: relative;
-      background:
-        repeating-linear-gradient(
-          0deg, transparent 0 29px, #c6b18b18 30px
-        ),
-        #fffaf0;
-      border: 1px solid #e1d0ad;
-      box-shadow: inset 5px 0 8px #8b6b3a12;
-    }
+        #papaScrap #sbOpen,
+        #papaScrap #sbClose {
+            border: 1px solid #f8d7e5;
+            border-radius: 24px;
+            background: #f4d4df;
+            color: #432633;
+            padding: 12px 20px;
+        }
 
-    #papaScrapbook .sb-tape {
-      width: 85px;
-      height: 22px;
-      position: absolute;
-      top: 8px;
-      left: 50%;
-      transform: translateX(-50%) rotate(-4deg);
-      background: #e8c9a5bb;
-      z-index: 2;
-    }
+        #papaScrap .sb-page {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #100d12;
+            animation: sbPageIn .35s ease both;
+        }
 
-    #papaScrapbook .sb-photo-frame {
-      width: 100%;
-      max-width: 300px;
-      margin: 10px auto 0;
-      padding: 9px 9px 14px;
-      background: white;
-      box-shadow: 0 5px 13px #5c453024;
-      transform: rotate(-1.5deg);
-    }
+        #papaScrap .sb-page[hidden],
+        #papaScrap .sb-cover[hidden],
+        #papaScrap .sb-controls[hidden] {
+            display: none !important;
+        }
 
-    #papaScrapbook .sb-photo-frame img {
-      display: block;
-      width: 100%;
-      max-height: 345px;
-      object-fit: contain;
-      background: #f2e8d9;
-    }
+        #papaScrap #sbPhoto {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: opacity .18s ease;
+        }
 
-    #papaScrapbook .sb-heart-doodle {
-      margin-top: 12px;
-      color: #bd817e;
-      font-size: 23px;
-      letter-spacing: 7px;
-    }
+        #papaScrap .sb-page-number {
+            position: absolute;
+            left: 50%;
+            bottom: 12px;
+            transform: translateX(-50%);
+            border-radius: 18px;
+            padding: 6px 13px;
+            background: #180f18cc;
+            color: white;
+            font: 13px Arial, sans-serif;
+        }
 
-    #papaScrapbook .sb-controls {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 7px;
-      margin-top: 12px;
-      font: 11px system-ui, sans-serif;
-    }
+        #papaScrap .sb-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 42px;
+            height: 54px;
+            border: 1px solid #ffffff80;
+            border-radius: 12px;
+            background: #1c1019a8;
+            color: white;
+            font: 34px Arial, sans-serif;
+            line-height: 1;
+        }
 
-    #papaScrapbook .sb-button,
-    #papaScrapbook .sb-menu-button {
-      min-height: 42px;
-      padding: 10px 13px;
-      border: 1px solid #d8b996;
-      border-radius: 24px;
-      background: #fff8eb;
-      color: #76503e;
-      font: 12px system-ui, sans-serif;
-      cursor: pointer;
-      touch-action: manipulation;
-    }
+        #papaScrap .sb-prev { left: 9px; }
+        #papaScrap .sb-next { right: 9px; }
 
-    #papaScrapbook .sb-button:disabled {
-      opacity: .35;
-      cursor: default;
-    }
+        #papaScrap .sb-arrow:disabled {
+            opacity: .3;
+            cursor: default;
+        }
 
-    #papaScrapbook .sb-menu-button {
-      background: #fffaf2;
-    }
+        #papaScrap .sb-controls {
+            flex: 0 0 auto;
+            width: min(100%, 650px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding-top: 10px;
+            font: 13px Arial, sans-serif;
+        }
 
-    @keyframes sbPageTurn {
-      from { opacity: .5; transform: rotateY(-18deg) translateX(12px); }
-      to { opacity: 1; transform: rotateY(0) translateX(0); }
-    }
+        #papaScrap #sbClose {
+            padding: 9px 15px;
+            font: 14px Arial, sans-serif;
+        }
 
-    @media (prefers-reduced-motion: reduce) {
-      #papaScrapbook *,
-      #papaScrapbook *::before,
-      #papaScrapbook *::after {
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-      }
-    }
-  `;
+        @keyframes sbPageIn {
+            from { opacity: .5; transform: scale(.985); }
+            to { opacity: 1; transform: scale(1); }
+        }
 
-  document.head.appendChild(style);
+        @media (prefers-reduced-motion: reduce) {
+            #papaScrap .sb-page {
+                animation: none;
+            }
+        }
+    `;
+
+    document.head.appendChild(style);
 }
