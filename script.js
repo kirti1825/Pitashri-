@@ -1603,7 +1603,7 @@ touch-action: manipulation;
 
 /* Papa and Didi closer */
 .family-papa {
-    left: 60%;
+    left: 64%;
     transform: translate(-50%, 35px);
 }
 
@@ -1612,7 +1612,7 @@ touch-action: manipulation;
 }
 
 .family-didi {
-    right: -2%;
+    right: 5%;
 }
 
 /* MOBILE */
@@ -1644,9 +1644,8 @@ touch-action: manipulation;
     }
 }
 
-/* =========================
-   TABLE — SMALLER
-========================= */
+
+/* SIMPLE SINGLE PINK TABLE */
 
 .party-table {
     position: absolute;
@@ -1672,12 +1671,12 @@ touch-action: manipulation;
         #b9879d
     );
     border: 3px solid #70485e;
-    box-shadow: 0 5px 15px rgba(0,0,0,.35);
+    box-shadow: 0 5px 15px rgba(0,0,0,.25);
 }
 
 .table-cloth {
     position: absolute;
-    top: 34px;
+    top: 32px;
     left: 17px;
     width: 146px;
     height: 78px;
@@ -1693,8 +1692,9 @@ touch-action: manipulation;
         88% 100%,
         12% 100%
     );
-    opacity: .95;
+    opacity: .98;
 }
+
 
 /* =========================
    CAKE — ON THE TABLE
