@@ -968,22 +968,35 @@ function startPartyScene() {
             <div class="party-ground"></div>
 
 
-            <!-- BOTH OF YOU -->
-            <div class="party-characters">
+<!-- THE WHOLE FAMILY BEHIND PAPA'S CAKE -->
+        <div class="party-characters">
 
-                <img
-                    class="girl-party"
-                    src="IMG_20260908_213133.png"
-                    alt=""
-                >
+            <img
+                class="family-member family-me"
+                src="BackgroundEraser_20261007_103034752.png"
+                alt="Me"
+            >
 
-                <img
-                    class="boy-party"
-                    src="IMG_20260908_212512.png"
-                    alt=""
-                >
+            <img
+                class="family-member family-mummy"
+                src="BackgroundEraser_20261007_103635102.png"
+                alt="Mummy"
+            >
 
-            </div>
+            <img
+                class="family-member family-papa"
+                src="BackgroundEraser_20261007_103851196.png"
+                alt="Papa"
+            >
+
+            <img
+                class="family-member family-didi"
+                src="BackgroundEraser_20261007_103651794.png"
+                alt="Didi"
+            >
+
+        </div>
+            
 
 
             <!-- TABLE + CAKE -->
@@ -1072,29 +1085,12 @@ document.querySelectorAll(".lantern").forEach(lantern => {
     }
 }, 17000);
 
-    /* GIRL APPEARS */
+    /* THE WHOLE FAMILY APPEARS */
+document.querySelectorAll(".family-member").forEach((member, index) => {
     setTimeout(() => {
-
-        const girl = document.querySelector(".girl-party");
-
-        if (girl) {
-            girl.classList.add("girl-show");
-        }
-
-    }, 500);
-
-
-    /* BOY APPEARS */
-    setTimeout(() => {
-
-        const boy = document.querySelector(".boy-party");
-
-        if (boy) {
-            boy.classList.add("boy-show");
-        }
-
-    }, 1300);
-
+        if (member) member.classList.add("family-show");
+    }, 500 + index * 350);
+});
 
     /*
      * CONFETTI BURST
@@ -1567,66 +1563,85 @@ touch-action: manipulation;
 
 
     /* =========================
-       CHARACTERS
-    ========================= */
+   FAMILY BEHIND THE CAKE
+========================= */
 
+.party-characters {
+    position: absolute;
+    left: 50%;
+    bottom: 8%;
+    width: min(94%, 500px);
+    height: 300px;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.family-member {
+    position: absolute;
+    bottom: 0;
+    width: 24%;
+    max-height: 280px;
+    object-fit: contain;
+    object-position: bottom center;
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.family-member.family-show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.family-me {
+    left: 2%;
+}
+
+.family-mummy {
+    left: 26%;
+}
+
+.family-papa {
+    left: 50%;
+    transform: translate(-50%, 35px);
+}
+
+.family-papa.family-show {
+    transform: translate(-50%, 0);
+}
+
+.family-didi {
+    right: 2%;
+}
+
+@media (max-width: 600px) {
     .party-characters {
-        position: absolute;
-
-        left: 50%;
+        width: 98%;
+        height: 230px;
         bottom: 8%;
-
-        width: 430px;
-        height: 300px;
-
-        transform:
-            translateX(-50%);
-
-        z-index: 10;
     }
 
-
-    .girl-party,
-    .boy-party {
-
-        position: absolute;
-
-        width: 150px;
-
-        bottom: 0;
-
-        opacity: 0;
-
-        display: block;
-
-        transition:
-            opacity 1.2s ease,
-            transform 1.2s ease;
+    .family-member {
+        width: 25%;
+        max-height: 220px;
     }
 
-
-    .girl-party {
-        left: 15px;
-        transform: translateY(35px);
+    .family-me {
+        left: 0;
     }
 
-
-    .boy-party {
-        right: 15px;
-        transform: translateY(35px);
+    .family-mummy {
+        left: 25%;
     }
 
-
-    .girl-party.girl-show {
-        opacity: 1;
-        transform: translateY(0);
+    .family-papa {
+        left: 50%;
     }
 
-
-    .boy-party.boy-show {
-        opacity: 1;
-        transform: translateY(0);
+    .family-didi {
+        right: 0;
     }
+}
 
 
     /* =========================
