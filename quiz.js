@@ -1,3 +1,19 @@
+function openPapaPhoto(event) {
+    const img = event.target.closest(".scrapbook-photo img");
+    if (!img) return;
+
+    const overlay = document.createElement("div");
+    overlay.className = "papa-photo-overlay";
+
+    const enlarged = document.createElement("img");
+    enlarged.src = img.src;
+    enlarged.alt = img.alt;
+
+    overlay.appendChild(enlarged);
+    overlay.addEventListener("click", () => overlay.remove());
+    document.body.appendChild(overlay);
+}
+
 function startPapaScrapbook() {
     const root = document.getElementById("birthdayAnimation");
 
@@ -27,6 +43,7 @@ function startPapaScrapbook() {
             </header>
 
             <div class="scrapbook-gallery">
+            onclick="openPapaPhoto(event)">
                 ${photos.map((photo, index) => `
                     <figure class="scrapbook-photo">
                         <img
