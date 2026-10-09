@@ -2013,13 +2013,13 @@ function addPartyStyles() {
 
     if (score <= 6) {
         message = "Buddhu 😠🔪";
-        image = "d3d6fa10820fb004a022245ed8a93705~3.jpg";
+        image = "71fd8c1728bf857e0c092c1953a72479~2.jpg";
     } else if (score <= 10) {
         message = "Huhhh 😏";
-        image = "f52eadd484299a0ad4ec6d0c9183ca44~2.jpg";
+        image = "d3d6fa10820fb004a022245ed8a93705~4.jpg";
     } else {
         message = "Hehee 💐🤭";
-        image = "52aff701a1029da44ddfaaa70b55472a~2.jpg";
+        image = "32500c06455395aa48918b13bd3138bb (1)~2.jpg";
     }
 
     birthdayAnimation.innerHTML = `
