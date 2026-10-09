@@ -94,7 +94,7 @@ enterButton.addEventListener("click", () => {
 
                 <!-- CENTER WELCOME MESSAGE -->
                 <div class="welcome-message">
-                    Welcome to the party, my cutiee...!! 💗
+                    Welcome to the party...!! 💗
                 </div>
 
             </div>
@@ -862,7 +862,7 @@ function startPartyScene() {
             </div>
 
             <div class="birthday-title">
-    Happy Birthday Aryan 🌷
+    Happy Birthday Papa 🌷
 </div>
 
 
