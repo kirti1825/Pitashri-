@@ -56,17 +56,19 @@ function startMemoryMenu() {
                     </button>
 
 
-                    <!-- CARD 3: FUNNY PAPA HABITS -->
-                    <button class="memory-card movie-card" type="button">
-                        <div class="memory-card-icon">😂</div>
+<!-- CARD 3: FUNNY PAPA HABITS -->
+<button class="memory-card movie-card" type="button" onclick="startPapaMovieScene()">
+    <div class="memory-card-icon">😂</div>
 
-                        <div class="memory-card-text">
-                            <h2>Only Papa Can Do This</h2>
-                            <p>Little things only Papa could get away with.</p>
-                        </div>
+    <div class="memory-card-text">
+        <h2>Only Papa Can Do This</h2>
+        <p>Little things only Papa could get away with.</p>
+    </div>
 
-                        <span class="memory-card-arrow">→</span>
-                    </button>
+    <span class="memory-card-arrow">→</span>
+</button>
+
+                    
 
 
                     <!-- CARD 4: PAPA'S GYAAN PUZZLE -->
