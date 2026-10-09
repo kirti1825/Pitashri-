@@ -1570,8 +1570,8 @@ touch-action: manipulation;
     position: absolute;
     left: 50%;
     bottom: 8%;
-    width: min(94%, 500px);
-    height: 300px;
+    width: 100%;
+    height: 360px;
     transform: translateX(-50%);
     z-index: 10;
 }
@@ -1579,18 +1579,13 @@ touch-action: manipulation;
 .family-member {
     position: absolute;
     bottom: 0;
-    width: 24%;
-    max-height: 280px;
+    width: 34%;
+    max-height: 340px;
     object-fit: contain;
     object-position: bottom center;
     opacity: 0;
     transform: translateY(35px);
     transition: opacity 1.2s ease, transform 1.2s ease;
-}
-
-.family-member.family-show {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .family-me {
