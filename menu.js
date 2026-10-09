@@ -134,8 +134,8 @@ function startMemoryMenu() {
     });
 
     document.querySelector(".movie-card").addEventListener("click", () => {
-        openPapaSection("startPapaHabitsScene", "Only Papa Can Do This");
-    });
+    document.activeElement?.blur();
+});
 
     document.querySelector(".memories-card").addEventListener("click", () => {
         openPapaSection("startPapaGyaanPuzzleScene", "Unlock Papa's Gyaan");
