@@ -1312,10 +1312,8 @@ function addPartyStyles() {
         width: 30px;
         height: 42px;
 
-        opacity: .9;
-
-        animation:
-            lanternRise linear infinite;
+        opacity: 1 !important;
+animation: lanternRise linear infinite;
 
             cursor: pointer;
 touch-action: manipulation;
