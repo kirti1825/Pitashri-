@@ -1587,7 +1587,10 @@ touch-action: manipulation;
     transform: translateY(35px);
     transition: opacity 1.2s ease, transform 1.2s ease;
 }
-
+.family-member.family-show {
+    opacity: 1;
+    transform: translateY(0);
+}
 .family-me {
     left: 2%;
 }
