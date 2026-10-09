@@ -1292,11 +1292,10 @@ function addPartyStyles() {
     }
 
 
-    /* =========================
-       15 FLOATING LANTERNS
-    ========================= */
+/* =========================
+   15 FLOATING LANTERNS
+========================= */
 
-    
 .sky-lanterns {
     position: absolute;
     inset: 0;
@@ -1304,92 +1303,77 @@ function addPartyStyles() {
     pointer-events: auto;
 }
 
-/* BEAUTIFUL FLOATING SKY LANTERNS */
 .lantern {
     position: absolute;
     bottom: -90px;
-    width: 34px;
-    height: 48px;
+    width: 30px;
+    height: 42px;
     opacity: 1;
     animation: lanternRise linear infinite;
     cursor: pointer;
     touch-action: manipulation;
 }
 
-/* Rounded paper body */
+/* Simple glowing paper body — no outline */
 .lantern-body {
     position: absolute;
-    left: 4px;
-    top: 9px;
-    width: 26px;
-    height: 34px;
-
-    border-radius: 45% 45% 40% 40% / 22% 22% 30% 30%;
-
+    left: 3px;
+    top: 5px;
+    width: 24px;
+    height: 32px;
+    border-radius: 7px 7px 5px 5px;
     background: linear-gradient(
-        to right,
-        #d98543 0%,
-        #ffca78 22%,
-        #fff0c2 50%,
-        #ffc16a 78%,
-        #d98543 100%
+        to bottom,
+        #fff8d6,
+        #ffd782,
+        #ffad50
     );
-
     box-shadow:
-        0 0 9px rgba(255, 198, 115, 0.8),
-        0 0 24px rgba(255, 174, 91, 0.4),
-        inset 0 0 6px rgba(255, 255, 225, 0.65);
+        0 0 18px rgba(255, 215, 130, .95),
+        0 0 38px rgba(255, 177, 87, .8),
+        0 0 58px rgba(255, 156, 66, .4);
 }
 
+/* Soft raised top */
+.lantern-top {
+    position: absolute;
+    left: 7px;
+    top: 1px;
+    width: 16px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ffd58a;
+    box-shadow: 0 0 12px rgba(255, 210, 130, .8);
+}
 
-    .lantern-top {
-        position: absolute;
+/* Strong inner light */
+.lantern-glow {
+    position: absolute;
+    left: 9px;
+    top: 12px;
+    width: 12px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgba(255, 255, 220, .95);
+    filter: blur(5px);
+    box-shadow: 0 0 14px rgba(255, 240, 170, .9);
+}
 
-        left: 7px;
-        top: 1px;
+.lantern2  { left:10%; animation-duration:13s; animation-delay:6s; }
+.lantern3  { left:17%; animation-duration:16s; animation-delay:3s; }
+.lantern4  { left:24%; animation-duration:12s; animation-delay:8s; }
+.lantern5  { left:31%; animation-duration:17s; animation-delay:2s; }
+.lantern6  { left:38%; animation-duration:14s; animation-delay:7s; }
+.lantern7  { left:45%; animation-duration:19s; animation-delay:4s; }
+.lantern8  { left:52%; animation-duration:15s; animation-delay:9s; }
+.lantern9  { left:59%; animation-duration:13s; animation-delay:5s; }
+.lantern10 { left:66%; animation-duration:18s; animation-delay:2s; }
+.lantern11 { left:73%; animation-duration:14s; animation-delay:10s; }
+.lantern12 { left:80%; animation-duration:17s; animation-delay:6s; }
+.lantern13 { left:86%; animation-duration:12s; animation-delay:3s; }
+.lantern14 { left:91%; animation-duration:16s; animation-delay:8s; }
+.lantern15 { left:96%; animation-duration:19s; animation-delay:5s; }
 
-        width: 16px;
-        height: 6px;
-
-        border-radius: 50%;
-
-        background: #d99a58;
-    }
-
-
-    .lantern-glow {
-        position: absolute;
-
-        left: 9px;
-        top: 12px;
-
-        width: 12px;
-        height: 18px;
-
-        border-radius: 50%;
-
-        background: rgba(255,245,190,.8);
-
-        filter: blur(5px);
-    }
-
-
-    .lantern1  { left:4%;  animation-duration:18s; animation-delay:1s; }
-    .lantern2  { left:10%; animation-duration:13s; animation-delay:6s; }
-    .lantern3  { left:17%; animation-duration:16s; animation-delay:3s; }
-    .lantern4  { left:24%; animation-duration:12s; animation-delay:8s; }
-    .lantern5  { left:31%; animation-duration:17s; animation-delay:2s; }
-    .lantern6  { left:38%; animation-duration:14s; animation-delay:7s; }
-    .lantern7  { left:45%; animation-duration:19s; animation-delay:4s; }
-    .lantern8  { left:52%; animation-duration:15s; animation-delay:9s; }
-    .lantern9  { left:59%; animation-duration:13s; animation-delay:5s; }
-    .lantern10 { left:66%; animation-duration:18s; animation-delay:2s; }
-    .lantern11 { left:73%; animation-duration:14s; animation-delay:10s; }
-    .lantern12 { left:80%; animation-duration:17s; animation-delay:6s; }
-    .lantern13 { left:86%; animation-duration:12s; animation-delay:3s; }
-    .lantern14 { left:91%; animation-duration:16s; animation-delay:8s; }
-    .lantern15 { left:96%; animation-duration:19s; animation-delay:5s; }
-    
 .lantern.popped {
     animation: lanternPop 0.45s ease-out forwards !important;
     pointer-events: none;
@@ -1415,14 +1399,12 @@ function addPartyStyles() {
 @keyframes lanternPop {
     0% {
         transform: scale(1);
-        opacity: .9;
+        opacity: 1;
     }
-
     45% {
         transform: scale(1.35);
         opacity: 1;
     }
-
     100% {
         transform: scale(0);
         opacity: 0;
@@ -1434,12 +1416,17 @@ function addPartyStyles() {
         transform: translate(-50%, -50%) scale(.3);
         opacity: 1;
     }
-
     100% {
         transform: translate(-50%, -50%) scale(3);
         opacity: 0;
     }
 }
+
+    
+
+
+    
+    
 .birthday-title {
     position: absolute;
     top: 38%;
@@ -1980,19 +1967,22 @@ function addPartyStyles() {
 @keyframes lanternFloat {
     0% {
         transform: translateY(0) translateX(0) rotate(-3deg);
-        opacity: 0;
+        opacity: 1;
     }
     10% {
         opacity: 1;
     }
     50% {
         transform: translateY(-55vh) translateX(20px) rotate(3deg);
+        opacity: 1;
     }
     100% {
         transform: translateY(-120vh) translateX(-25px) rotate(-3deg);
-        opacity: 0;
+        opacity: 1;
     }
 }
+
+
 
 @keyframes flameFlicker {
     from {
