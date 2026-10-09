@@ -1631,7 +1631,7 @@ function addPartyStyles() {
     position: absolute;
     left: 50%;
     bottom: 8%;
-    width: 180px;
+    width: 220px;
     height: 125px;
     transform: translateX(-50%);
     z-index: 12;
@@ -1641,7 +1641,7 @@ function addPartyStyles() {
     position: absolute;
     top: 20px;
     left: 0;
-    width: 180px;
+    width: 220px;
     height: 26px;
     box-sizing: border-box;
     border-radius: 50%;
@@ -1658,7 +1658,7 @@ function addPartyStyles() {
     position: absolute;
     top: 32px;
     left: 17px;
-    width: 146px;
+    width: 186px;
     height: 78px;
     background: linear-gradient(
         to right,
