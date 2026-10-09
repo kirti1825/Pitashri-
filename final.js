@@ -539,37 +539,36 @@ function addScratchStyles() {
       .scratch-card, .prize-under { min-height: 200px; }
       .prize-under { padding: 12px 7px; }
     }
-
     @media (prefers-reduced-motion: reduce) {
       .scratch-world *, .scratch-world *::before {
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
       }
-      .back-menu-btn {
-  display: block;
-  margin: 18px auto 12px;
-  padding: 12px 24px;
-  border: 2px solid #ffb7d5;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #ffe0ef, #fff0f7);
-  color: #a83268;
-  font: inherit;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 5px 0 #f4b0ce;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.back-menu-btn:hover {
-  transform: translateY(-2px);
-}
-
-.back-menu-btn:active {
-  transform: translateY(3px);
-  box-shadow: 0 2px 0 #f4b0ce;
-}
     }
-  `;
 
+    .back-menu-btn {
+      display: block;
+      margin: 18px auto 12px;
+      padding: 12px 24px;
+      border: 2px solid #ffb7d5;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ffe0ef, #fff0f7);
+      color: #a83268;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 5px 0 #f4b0ce;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .back-menu-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .back-menu-btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 #f4b0ce;
+    }
+    `;
   document.head.appendChild(style);
 }
