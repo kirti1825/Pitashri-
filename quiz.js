@@ -1,7 +1,10 @@
-
 function startPapaScrapbook() {
-    const screen = document.getElementById("birthdayAnimation");
-    if (!screen) return;
+    const root = document.getElementById("birthdayAnimation");
+
+    if (!root) {
+        console.error("Scrapbook: birthdayAnimation container not found.");
+        return;
+    }
 
     const photos = [
         "IMG_20261009_164236_022~2.jpg",
@@ -14,300 +17,201 @@ function startPapaScrapbook() {
         "IMG_20261009_172247_204~2.jpg"
     ];
 
-    let page = -1;
+    root.innerHTML = `
+        <section class="papa-scrapbook">
+            <header class="scrapbook-header">
+                <div class="scrapbook-kicker">A LITTLE COLLECTION OF LOVE</div>
+                <h1>Papa Through the Years 💗</h1>
+                <p>Some moments deserve to stay forever.</p>
+                <div class="scrapbook-count">8 SPECIAL MEMORIES</div>
+            </header>
 
-    screen.innerHTML = `
-        <section id="papaScrapbook">
-            <button id="sbBack" type="button">← Back to Menu</button>
-
-            <div class="sb-book" id="sbBook">
-                <div class="sb-cover">
-                    <div class="sb-cover-decoration">✦ ❀ ✦</div>
-                    <div class="sb-cover-title">Our Little<br>Scrapbook</div>
-                    <div class="sb-cover-subtitle">A book full of Papa 💗</div>
-                    <div class="sb-cover-flower">❀</div>
-                    <button id="sbOpen" type="button">Open the Book ♡</button>
-                </div>
-
-                <div class="sb-page" id="sbPage" hidden>
-                    <img id="sbPhoto" alt="A special family memory">
-                    <div class="sb-page-number" id="sbPageNumber"></div>
-                    <button class="sb-arrow sb-prev" id="sbPrev"
-                        type="button" aria-label="Previous photo">‹</button>
-                    <button class="sb-arrow sb-next" id="sbNext"
-                        type="button" aria-label="Next photo">›</button>
-                </div>
+            <div class="scrapbook-gallery">
+                ${photos.map((photo, index) => `
+                    <figure class="scrapbook-photo">
+                        <img
+                            src="${photo}"
+                            alt="Papa memory ${index + 1}"
+                            loading="${index < 2 ? "eager" : "lazy"}"
+                            onerror="this.closest('figure').classList.add('photo-error')"
+                        >
+                        <figcaption>
+                            <span>MEMORY ${String(index + 1).padStart(2, "0")}</span>
+                            <span>♡</span>
+                        </figcaption>
+                        <div class="scrapbook-photo-error">
+                            This photo couldn't load. Please check its filename.
+                        </div>
+                    </figure>
+                `).join("")}
             </div>
 
-            <div class="sb-controls" id="sbControls" hidden>
-                <span id="sbCount"></span>
-                <button id="sbClose" type="button">Close Book</button>
-            </div>
+            <footer class="scrapbook-footer">
+                <div class="scrapbook-heart">♡</div>
+                <h2>Every picture holds a little piece of our story.</h2>
+                <p>And every memory with you is special, Papa.</p>
+
+                <button
+                    type="button"
+                    class="scrapbook-menu-button"
+                    onclick="startMemoryMenu()"
+                >
+                    ← Go to Menu
+                </button>
+            </footer>
         </section>
-    `;
 
-    addScrapbookStyles();
-
-    const book = document.getElementById("sbBook");
-    const cover = book.querySelector(".sb-cover");
-    const photoPage = document.getElementById("sbPage");
-    const photo = document.getElementById("sbPhoto");
-    const controls = document.getElementById("sbControls");
-
-    function showPhoto(index) {
-        page = Math.max(0, Math.min(index, photos.length - 1));
-
-        photo.style.opacity = "0";
-
-        window.setTimeout(() => {
-            photo.src = photos[page];
-            photo.style.opacity = "1";
-        }, 100);
-
-        document.getElementById("sbPageNumber").textContent =
-            `${page + 1} / ${photos.length}`;
-
-        document.getElementById("sbCount").textContent =
-            `Memory ${page + 1} of ${photos.length}`;
-
-        document.getElementById("sbPrev").disabled = page === 0;
-        document.getElementById("sbNext").disabled =
-            page === photos.length - 1;
-    }
-
-    function openBook() {
-        cover.hidden = true;
-        photoPage.hidden = false;
-        controls.hidden = false;
-        book.classList.add("sb-book-open");
-        showPhoto(0);
-    }
-
-    function closeBook() {
-        photoPage.hidden = true;
-        controls.hidden = true;
-        cover.hidden = false;
-        book.classList.remove("sb-book-open");
-        page = -1;
-    }
-
-    document.getElementById("sbOpen").addEventListener("click", openBook);
-
-    document.getElementById("sbPrev").addEventListener("click", () => {
-        if (page > 0) showPhoto(page - 1);
-    });
-
-    document.getElementById("sbNext").addEventListener("click", () => {
-        if (page < photos.length - 1) showPhoto(page + 1);
-    });
-
-    document.getElementById("sbClose").addEventListener("click", closeBook);
-
-    document.getElementById("sbBack").addEventListener("click", () => {
-        if (typeof startMemoryMenu === "function") {
-            startMemoryMenu();
-        }
-    });
-}
-
-function addScrapbookStyles() {
-    let oldStyle = document.getElementById("papaScrapbookStyles");
-    if (oldStyle) oldStyle.remove();
-
-    const style = document.createElement("style");
-    style.id = "papaScrapbookStyles";
-
-    style.textContent = `
-        #papaScrapbook {
-            position: fixed;
-            inset: 0;
-            z-index: 10000;
-            width: 100%;
-            height: 100%;
-            height: 100dvh;
-            overflow: hidden;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background:
-                radial-gradient(ellipse at top, #51354f, #21182c 60%, #100e19);
-            color: #fff5f8;
-            font-family: Georgia, serif;
-            padding: 12px;
-            padding-top: max(12px, env(safe-area-inset-top));
-            padding-bottom: max(12px, env(safe-area-inset-bottom));
-        }
-
-        #papaScrapbook * {
-            box-sizing: border-box;
-        }
-
-        #papaScrapbook button {
-            font: inherit;
-            cursor: pointer;
-            touch-action: manipulation;
-        }
-
-        #papaScrap #sbBack {
-            align-self: flex-start;
-            flex: 0 0 auto;
-            border: 1px solid #f3c9db88;
-            border-radius: 22px;
-            padding: 10px 16px;
-            background: #241725;
-            color: #fff4fa;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-
-        #papaScrap .sb-book {
-            position: relative;
-            flex: 1 1 auto;
-            min-height: 0;
-            width: min(100%, 650px);
-            max-height: 100%;
-            border: 3px solid #b77a57;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #492b31;
-            box-shadow: 0 8px 28px #0008;
-        }
-
-        #papaScrap .sb-cover {
-            width: 100%;
-            height: 100%;
-            min-height: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 22px;
-            text-align: center;
-            padding: 20px;
-            background:
-                radial-gradient(circle at 50% 40%, #81535b, #492b31 72%);
-            border: 8px double #d9ad80;
-        }
-
-        #papaScrap .sb-cover-decoration {
-            color: #f6d5ac;
-            font-size: 24px;
-            letter-spacing: 7px;
-        }
-
-        #papaScrap .sb-cover-title {
-            font-size: clamp(34px, 8vw, 58px);
-            line-height: 1.12;
-            color: #fff0d8;
-            text-shadow: 0 3px 12px #160b15;
-        }
-
-        #papaScrap .sb-cover-subtitle {
-            font-size: 16px;
-            color: #f8dce6;
-        }
-
-        #papaScrap .sb-cover-flower {
-            font-size: 40px;
-            color: #f5c6d7;
-        }
-
-        #papaScrap #sbOpen,
-        #papaScrap #sbClose {
-            border: 1px solid #f8d7e5;
-            border-radius: 24px;
-            background: #f4d4df;
-            color: #432633;
-            padding: 12px 20px;
-        }
-
-        #papaScrap .sb-page {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: #100d12;
-            animation: sbPageIn .35s ease both;
-        }
-
-        #papaScrap .sb-page[hidden],
-        #papaScrap .sb-cover[hidden],
-        #papaScrap .sb-controls[hidden] {
-            display: none !important;
-        }
-
-        #papaScrap #sbPhoto {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            transition: opacity .18s ease;
-        }
-
-        #papaScrap .sb-page-number {
-            position: absolute;
-            left: 50%;
-            bottom: 12px;
-            transform: translateX(-50%);
-            border-radius: 18px;
-            padding: 6px 13px;
-            background: #180f18cc;
-            color: white;
-            font: 13px Arial, sans-serif;
-        }
-
-        #papaScrap .sb-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 42px;
-            height: 54px;
-            border: 1px solid #ffffff80;
-            border-radius: 12px;
-            background: #1c1019a8;
-            color: white;
-            font: 34px Arial, sans-serif;
-            line-height: 1;
-        }
-
-        #papaScrap .sb-prev { left: 9px; }
-        #papaScrap .sb-next { right: 9px; }
-
-        #papaScrap .sb-arrow:disabled {
-            opacity: .3;
-            cursor: default;
-        }
-
-        #papaScrap .sb-controls {
-            flex: 0 0 auto;
-            width: min(100%, 650px);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            padding-top: 10px;
-            font: 13px Arial, sans-serif;
-        }
-
-        #papaScrap #sbClose {
-            padding: 9px 15px;
-            font: 14px Arial, sans-serif;
-        }
-
-        @keyframes sbPageIn {
-            from { opacity: .5; transform: scale(.985); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            #papaScrap .sb-page {
-                animation: none;
+        <style>
+            .papa-scrapbook {
+                min-height: 100%;
+                padding: 28px 16px 40px;
+                box-sizing: border-box;
+                background:
+                    radial-gradient(ellipse at top, #45303e 0%, transparent 55%),
+                    linear-gradient(160deg, #17131b, #251923 55%, #17131b);
+                color: #fff5f7;
+                font-family: Georgia, "Times New Roman", serif;
+                overflow: auto;
             }
-        }
+
+            .scrapbook-header {
+                max-width: 620px;
+                margin: 0 auto 28px;
+                text-align: center;
+            }
+
+            .scrapbook-kicker {
+                color: #efb8cb;
+                font: 11px/1.6 Arial, sans-serif;
+                letter-spacing: 3px;
+            }
+
+            .scrapbook-header h1 {
+                margin: 12px 0;
+                font-size: clamp(30px, 7vw, 46px);
+                line-height: 1.15;
+            }
+
+            .scrapbook-header p,
+            .scrapbook-footer p {
+                color: #e5ccd5;
+                font: 14px/1.7 Arial, sans-serif;
+            }
+
+            .scrapbook-count {
+                display: inline-block;
+                margin-top: 12px;
+                padding: 8px 14px;
+                border: 1px solid #b98299;
+                border-radius: 30px;
+                color: #f4c9d9;
+                font: 10px Arial, sans-serif;
+                letter-spacing: 2px;
+            }
+
+            .scrapbook-gallery {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 16px;
+                max-width: 760px;
+                margin: 0 auto;
+            }
+
+            .scrapbook-photo {
+                min-width: 0;
+                margin: 0;
+                padding: 8px;
+                border: 1px solid #684654;
+                border-radius: 5px;
+                background: #fff8f5;
+                color: #553744;
+                box-shadow: 0 8px 24px #0003;
+            }
+
+            .scrapbook-photo img {
+                display: block;
+                width: 100%;
+                height: clamp(145px, 42vw, 300px);
+                object-fit: contain;
+                background: #eee5e8;
+                border-radius: 2px;
+            }
+
+            .scrapbook-photo figcaption {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 5px;
+                padding: 10px 3px 4px;
+                font: 10px Arial, sans-serif;
+                letter-spacing: 1px;
+            }
+
+            .scrapbook-photo figcaption span:last-child {
+                color: #b25f7d;
+                font-size: 18px;
+            }
+
+            .scrapbook-photo-error {
+                display: none;
+                padding: 8px 2px;
+                color: #9b254d;
+                font: 12px/1.5 Arial, sans-serif;
+            }
+
+            .scrapbook-photo.photo-error .scrapbook-photo-error {
+                display: block;
+            }
+
+            .scrapbook-footer {
+                max-width: 600px;
+                margin: 38px auto 0;
+                text-align: center;
+            }
+
+            .scrapbook-heart {
+                color: #f2b6cd;
+                font-size: 36px;
+            }
+
+            .scrapbook-footer h2 {
+                font-size: 25px;
+                line-height: 1.4;
+            }
+
+            .scrapbook-menu-button {
+                display: inline-block;
+                margin-top: 18px;
+                padding: 14px 24px;
+                border: 1px solid #e4a9c0;
+                border-radius: 30px;
+                background: #f1bfd0;
+                color: #38202c;
+                font-size: 14px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .scrapbook-menu-button:focus-visible {
+                outline: 3px solid white;
+                outline-offset: 4px;
+            }
+
+            @media (max-width: 360px) {
+                .scrapbook-gallery {
+                    gap: 10px;
+                }
+
+                .scrapbook-photo {
+                    padding: 5px;
+                }
+
+                .scrapbook-photo img {
+                    height: 140px;
+                }
+            }
+        </style>
     `;
 
-    document.head.appendChild(style);
+    root.scrollTop = 0;
 }
