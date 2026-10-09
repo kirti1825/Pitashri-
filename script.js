@@ -2015,10 +2015,10 @@ function addPartyStyles() {
         message = "Buddhu 😠🔪";
         image = "d3d6fa10820fb004a022245ed8a93705~3.jpg";
     } else if (score <= 10) {
-        message = "Good, good… not bad! You can come 😌";
+        message = "Huhhh 😏";
         image = "f52eadd484299a0ad4ec6d0c9183ca44~2.jpg";
     } else {
-        message = "Hehee cutieee 💐🤭";
+        message = "Hehee 💐🤭";
         image = "52aff701a1029da44ddfaaa70b55472a~2.jpg";
     }
 
