@@ -1644,263 +1644,183 @@ touch-action: manipulation;
     }
 }
 
+/* =========================
+   TABLE — SMALLER
+========================= */
 
+.party-table {
+    position: absolute;
+    left: 50%;
+    bottom: 8%;
+    width: 180px;
+    height: 125px;
+    transform: translateX(-50%);
+    z-index: 12;
+}
 
+.table-top {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 180px;
+    height: 26px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background: linear-gradient(
+        to bottom,
+        #ead3dc,
+        #b9879d
+    );
+    border: 3px solid #70485e;
+    box-shadow: 0 5px 15px rgba(0,0,0,.35);
+}
 
+.table-cloth {
+    position: absolute;
+    top: 34px;
+    left: 17px;
+    width: 146px;
+    height: 78px;
+    background: linear-gradient(
+        to right,
+        #a66f88,
+        #d7a5b9,
+        #a66f88
+    );
+    clip-path: polygon(
+        5% 0,
+        95% 0,
+        88% 100%,
+        12% 100%
+    );
+    opacity: .95;
+}
 
-    /* =========================
-       TABLE
-    ========================= */
+/* =========================
+   CAKE — ON THE TABLE
+========================= */
 
-    .party-table {
+.party-cake {
+    position: absolute;
+    left: 50%;
+    top: -44px;
+    width: 82px;
+    height: 75px;
+    transform: translateX(-50%);
+    z-index: 20;
+}
 
-        position: absolute;
+.cake-layer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 8px 8px 12px 12px;
+    box-shadow: inset 0 -5px 8px rgba(0,0,0,.12);
+}
 
-        left: 50%;
-        bottom: 8%;
+.cake-layer-top {
+    top: 0;
+    width: 54px;
+    height: 20px;
+    box-sizing: border-box;
+    background: linear-gradient(
+        to bottom,
+        #f6dce6,
+        #dca6bc
+    );
+    border: 2px solid #805269;
+}
 
-        width: 210px;
-        height: 145px;
+.cake-layer-middle {
+    top: 18px;
+    width: 64px;
+    height: 25px;
+    box-sizing: border-box;
+    background: linear-gradient(
+        to bottom,
+        #e5b6c8,
+        #bd7d9b
+    );
+    border: 2px solid #70475c;
+}
 
-        transform:
-            translateX(-50%);
+.cake-layer-bottom {
+    top: 40px;
+    width: 76px;
+    height: 25px;
+    box-sizing: border-box;
+    background: linear-gradient(
+        to bottom,
+        #dba1b8,
+        #a96485
+    );
+    border: 2px solid #694054;
+}
 
-        z-index: 12;
+/* =========================
+   CANDLE
+========================= */
+
+.cake-candle {
+    position: absolute;
+    left: 50%;
+    top: -24px;
+    width: 8px;
+    height: 25px;
+    transform: translateX(-50%);
+    border-radius: 3px;
+    background: repeating-linear-gradient(
+        135deg,
+        #f8e1eb 0px,
+        #f8e1eb 4px,
+        #b97d9c 4px,
+        #b97d9c 7px
+    );
+}
+
+/* =========================
+   CANDLE FLAME
+========================= */
+
+.cake-flame {
+    position: absolute;
+    left: 50%;
+    top: -15px;
+    width: 12px;
+    height: 17px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at 50% 70%,
+        #fff9cf 0%,
+        #ffd26e 45%,
+        #ef8c4e 80%
+    );
+    box-shadow:
+        0 0 10px rgba(255,200,100,.8),
+        0 0 22px rgba(255,180,80,.45);
+    animation: flameFlicker .5s ease-in-out infinite alternate;
+}
+
+@keyframes flameFlicker {
+    from {
+        transform: translateX(-50%) scale(.9) rotate(-3deg);
     }
 
-
-    .table-top {
-
-        position: absolute;
-
-        top: 20px;
-        left: 0;
-
-        width: 210px;
-        height: 30px;
-
-        border-radius: 50%;
-
-        background:
-            linear-gradient(
-                to bottom,
-                #ead3dc,
-                #b9879d
-            );
-
-        border:
-            3px solid #70485e;
-
-        box-shadow:
-            0 5px 15px rgba(0,0,0,.35);
+    to {
+        transform: translateX(-50%) scale(1.1) rotate(3deg);
     }
+}
 
 
-    .table-cloth {
 
-        position: absolute;
 
-        top: 34px;
-        left: 20px;
 
-        width: 170px;
-        height: 90px;
+    
 
-        background:
-            linear-gradient(
-                to right,
-                #a66f88,
-                #d7a5b9,
-                #a66f88
-            );
 
-        clip-path:
-            polygon(
-                5% 0,
-                95% 0,
-                88% 100%,
-                12% 100%
-            );
-
-        opacity: .95;
-    }
-
-
-    /* =========================
-       CAKE
-    ========================= */
-
-    .party-cake {
-
-        position: absolute;
-
-        left: 50%;
-        top: -42px;
-
-        width: 90px;
-        height: 85px;
-
-        transform:
-            translateX(-50%);
-
-        z-index: 20;
-    }
-
-
-    .cake-layer {
-
-        position: absolute;
-
-        left: 50%;
-
-        transform:
-            translateX(-50%);
-
-        border-radius:
-            8px 8px 12px 12px;
-
-        box-shadow:
-            inset 0 -5px 8px rgba(0,0,0,.12);
-    }
-
-
-    .cake-layer-top {
-
-        top: 0;
-
-        width: 60px;
-        height: 24px;
-
-        background:
-            linear-gradient(
-                to bottom,
-                #f6dce6,
-                #dca6bc
-            );
-
-        border:
-            2px solid #805269;
-    }
-
-
-    .cake-layer-middle {
-
-        top: 20px;
-
-        width: 70px;
-        height: 27px;
-
-        background:
-            linear-gradient(
-                to bottom,
-                #e5b6c8,
-                #bd7d9b
-            );
-
-        border:
-            2px solid #70475c;
-    }
-
-
-    .cake-layer-bottom {
-
-        top: 44px;
-
-        width: 82px;
-        height: 27px;
-
-        background:
-            linear-gradient(
-                to bottom,
-                #dba1b8,
-                #a96485
-            );
-
-        border:
-            2px solid #694054;
-    }
-
-
-    /* =========================
-       CANDLE
-    ========================= */
-
-    .cake-candle {
-
-        position: absolute;
-
-        left: 50%;
-        top: -24px;
-
-        width: 8px;
-        height: 25px;
-
-        transform:
-            translateX(-50%);
-
-        border-radius: 3px;
-
-        background:
-            repeating-linear-gradient(
-                135deg,
-                #f8e1eb 0px,
-                #f8e1eb 4px,
-                #b97d9c 4px,
-                #b97d9c 7px
-            );
-    }
-
-
-    .cake-flame {
-
-        position: absolute;
-
-        left: 50%;
-        top: -15px;
-
-        width: 12px;
-        height: 17px;
-
-        transform:
-            translateX(-50%);
-
-        border-radius: 50%;
-
-        background:
-            radial-gradient(
-                circle at 50% 70%,
-                #fff9cf 0%,
-                #ffd26e 45%,
-                #ef8c4e 80%
-            );
-
-        box-shadow:
-            0 0 10px rgba(255,200,100,.8),
-            0 0 22px rgba(255,180,80,.45);
-
-        animation:
-            flameFlicker .5s ease-in-out infinite alternate;
-    }
-
-
-    @keyframes flameFlicker {
-
-        from {
-            transform:
-                translateX(-50%)
-                scale(.9)
-                rotate(-3deg);
-        }
-
-        to {
-            transform:
-                translateX(-50%)
-                scale(1.1)
-                rotate(3deg);
-        }
-    }
-
-
+    
+                
     /* =========================
        PARTY GLOW
     ========================= */
