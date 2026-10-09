@@ -229,6 +229,7 @@ function startPapaScrapbook() {
             html:has(.papa-scrapbook),
 body:has(.papa-scrapbook) {
     overflow: hidden !important;
+    height: 100% !important;
 }
 
 #birthdayAnimation:has(.papa-scrapbook) {
@@ -239,15 +240,18 @@ body:has(.papa-scrapbook) {
     height: 100dvh !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
-    box-sizing: border-box !important;
-    padding: 0 !important;
     margin: 0 !important;
+    padding: 0 !important;
 }
 
 #birthdayAnimation:has(.papa-scrapbook) .papa-scrapbook {
     min-height: 0 !important;
-    padding-bottom: 24px !important;
+    padding-bottom: 12px !important;
     overflow: visible !important;
+}
+
+#birthdayAnimation:has(.papa-scrapbook) .scrapbook-footer {
+    margin-bottom: 0 !important;
 }
         </style>
     `;
