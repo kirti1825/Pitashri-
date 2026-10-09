@@ -1,7 +1,7 @@
 
 /* ==========================================
    PART 4: PAPA'S GYAAN & DIL KI BAATEIN
-   Add this section to memories.js
+   Updated portrait photo puzzle + voice notes
 ========================================== */
 
 function startPapaGyaanScene() {
@@ -31,7 +31,8 @@ function startPapaGyaanScene() {
           <div id="pgPuzzlePanel" class="pg-panel">
             <div class="pg-photo-frame">
               <div id="pgPuzzle" class="pg-puzzle"
-                   role="group" aria-label="Photo jigsaw puzzle"></div>
+                   role="group"
+                   aria-label="Photo jigsaw puzzle"></div>
             </div>
 
             <p id="pgPuzzleMessage" class="pg-message">
@@ -47,7 +48,10 @@ function startPapaGyaanScene() {
             </p>
           </div>
 
-          <div id="pgVoicePanel" class="pg-panel pg-voice-panel" hidden>
+          <div id="pgVoicePanel"
+               class="pg-panel pg-voice-panel"
+               hidden>
+
             <div class="pg-success-heart">♡</div>
 
             <p class="pg-eyebrow">OUR MEMORY IS WHOLE</p>
@@ -61,13 +65,18 @@ function startPapaGyaanScene() {
             </p>
 
             <div class="pg-voice-list">
+
               <article class="pg-voice-card">
                 <span class="pg-voice-icon">💪</span>
+
                 <div class="pg-voice-copy">
                   <h3>M Square</h3>
                   <p>Money, muscles, and Papa's life lessons.</p>
-                  <audio controls preload="none" aria-label="M Square voice note">
-                    <source src="voice-notes/m-square.mp3" type="audio/mpeg">
+
+                  <audio controls preload="none"
+                         aria-label="M Square voice note">
+                    <source src="voice-notes/m-square.mp3"
+                            type="audio/mpeg">
                     Your browser does not support audio.
                   </audio>
                 </div>
@@ -75,11 +84,16 @@ function startPapaGyaanScene() {
 
               <article class="pg-voice-card">
                 <span class="pg-voice-icon">🌱</span>
+
                 <div class="pg-voice-copy">
                   <h3>First Deserve, Then Desire</h3>
                   <p>A lesson worth carrying through life.</p>
-                  <audio controls preload="none" aria-label="First Deserve, Then Desire voice note">
-                    <source src="voice-notes/first-deserve-then-desire.mp3" type="audio/mpeg">
+
+                  <audio controls preload="none"
+                         aria-label="First Deserve, Then Desire voice note">
+                    <source
+                      src="voice-notes/first-deserve-then-desire.mp3"
+                      type="audio/mpeg">
                     Your browser does not support audio.
                   </audio>
                 </div>
@@ -87,26 +101,36 @@ function startPapaGyaanScene() {
 
               <article class="pg-voice-card">
                 <span class="pg-voice-icon">🌙</span>
+
                 <div class="pg-voice-copy">
                   <h3>Shayari</h3>
                   <p>A few poetic words, straight from the heart.</p>
-                  <audio controls preload="none" aria-label="Shayari voice note">
-                    <source src="voice-notes/shayari.mp3" type="audio/mpeg">
+
+                  <audio controls preload="none"
+                         aria-label="Shayari voice note">
+                    <source src="voice-notes/shayari.mp3"
+                            type="audio/mpeg">
                     Your browser does not support audio.
                   </audio>
                 </div>
               </article>
+
             </div>
 
             <p class="pg-footer-note">
               Some lessons become memories. Some voices become home. ❤️
             </p>
-          </div>
 
-          <button class="pg-back-button" type="button"
-                  onclick="startMemoryMenu()">
-            ← Back to Menu
-          </button>
+            <!-- Back button appears ONLY after the puzzle is solved -->
+            <div class="pg-back-wrap">
+              <button class="pg-back-button"
+                      type="button"
+                      onclick="startMemoryMenu()">
+                ← Back to Menu
+              </button>
+            </div>
+
+          </div>
         </div>
       </section>
     `;
@@ -115,58 +139,76 @@ function startPapaGyaanScene() {
     startPapaHorizontalPuzzle();
 }
 
+
 function startPapaHorizontalPuzzle() {
     const puzzle = document.getElementById("pgPuzzle");
     const message = document.getElementById("pgPuzzleMessage");
     const progress = document.getElementById("pgProgress");
     const progressText = document.getElementById("pgProgressText");
 
-    // UPDATED PHOTO FILENAME
-    const photoPath = "Snapchat-1956059672.jpg";
+    if (!puzzle || !message || !progress || !progressText) {
+        console.error("Papa Gyaan puzzle elements are missing.");
+        return;
+    }
 
-    const rows = 3;
-    const cols = 4;
+    // NEW PHOTO: keep this file beside index.html
+    const photoPath = "IMG_20261009_164236_022~2.jpg";
+
+    // 12 pieces arranged in a portrait-friendly 3-column × 4-row grid
+    const rows = 4;
+    const cols = 3;
     const total = rows * cols;
 
     puzzle.style.setProperty("--pg-cols", cols);
     puzzle.style.setProperty("--pg-rows", rows);
 
     const image = new Image();
-    image.src = photoPath;
-
-    image.onerror = () => {
-        message.textContent =
-          "The photo couldn't load. Check that Snapchat-1956059672.jpg is in the same folder as index.html.";
-    };
-
     image.onload = () => {
-        let order = Array.from({ length: total }, (_, i) => i);
+        // Preserve the photo's exact original aspect ratio
+        puzzle.style.aspectRatio =
+            `${image.naturalWidth} / ${image.naturalHeight}`;
 
+        let order = Array.from(
+            { length: total },
+            (_, index) => index
+        );
+
+        // Shuffle, making sure the puzzle isn't already solved
         do {
             for (let i = order.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [order[i], order[j]] = [order[j], order[i]];
             }
-        } while (order.every((value, index) => value === index));
+        } while (order.every(
+            (value, index) => value === index
+        ));
 
-        puzzle.innerHTML = "";
+        let firstSelected = null;
+        let puzzleSolved = false;
+        let revealTimer = null;
 
         function updateProgress() {
             const correct = order.filter(
                 (value, index) => value === index
             ).length;
 
-            const percent = Math.round(correct / total * 100);
+            const percent = Math.round(
+                (correct / total) * 100
+            );
+
             progress.style.width = percent + "%";
             progressText.textContent = percent + "% complete";
 
-            if (correct === total) {
+            if (correct === total && !puzzleSolved) {
+                puzzleSolved = true;
+
                 message.textContent =
                     "You did it, Papa! Our memory is whole. ❤️";
 
                 puzzle.classList.add("pg-solved");
 
-                window.setTimeout(() => {
+                // Reveal the voice notes after the celebration
+                revealTimer = window.setTimeout(() => {
                     const puzzlePanel =
                         document.getElementById("pgPuzzlePanel");
                     const voicePanel =
@@ -176,33 +218,33 @@ function startPapaHorizontalPuzzle() {
                         puzzlePanel.hidden = true;
                         voicePanel.hidden = false;
                         voicePanel.classList.add("pg-reveal");
+
                         voicePanel.scrollIntoView({
                             behavior: "smooth",
                             block: "start"
                         });
                     }
-                }, 1000);
-            } else {
-                message.textContent =
-                    "Tap two pieces to swap them. You're bringing our memory together ✨";
+                }, 750);
             }
         }
-
-        let firstSelected = null;
 
         function renderPieces() {
             puzzle.innerHTML = "";
 
             order.forEach((imageIndex, position) => {
                 const tile = document.createElement("button");
+
                 tile.type = "button";
                 tile.className = "pg-piece";
                 tile.setAttribute(
                     "aria-label",
-                    "Puzzle piece " + (position + 1)
+                    `Puzzle piece ${position + 1}`
                 );
 
-                tile.style.backgroundImage = `url("${photoPath}")`;
+                tile.style.backgroundImage =
+                    `url("${photoPath}")`;
+
+                // Each tile shows its matching crop of the original photo
                 tile.style.backgroundSize =
                     `${cols * 100}% ${rows * 100}%`;
 
@@ -211,11 +253,11 @@ function startPapaHorizontalPuzzle() {
 
                 const x = cols === 1
                     ? 0
-                    : sourceCol / (cols - 1) * 100;
+                    : (sourceCol / (cols - 1)) * 100;
 
                 const y = rows === 1
                     ? 0
-                    : sourceRow / (rows - 1) * 100;
+                    : (sourceRow / (rows - 1)) * 100;
 
                 tile.style.backgroundPosition = `${x}% ${y}%`;
 
@@ -223,36 +265,51 @@ function startPapaHorizontalPuzzle() {
                     tile.classList.add("pg-piece-correct");
                 }
 
-                tile.addEventListener("click", () => {
-                    if (order.every(
-                        (value, index) => value === index
-                    )) return;
+                if (firstSelected === position) {
+                    tile.classList.add("pg-piece-selected");
+                    tile.setAttribute("aria-pressed", "true");
+                } else {
+                    tile.setAttribute("aria-pressed", "false");
+                }
 
+                tile.addEventListener("click", () => {
+                    if (puzzleSolved) return;
+
+                    // First tap selects a piece
                     if (firstSelected === null) {
                         firstSelected = position;
-                        tile.classList.add("pg-piece-selected");
 
                         message.textContent =
                             "Now choose the piece you want to swap it with 💗";
+
+                        renderPieces();
                         return;
                     }
 
+                    // Tapping the same piece cancels the selection
                     if (firstSelected === position) {
                         firstSelected = null;
+
+                        message.textContent =
+                            "Selection cancelled. Choose two pieces to swap ✨";
+
                         renderPieces();
-                        updateProgress();
                         return;
                     }
 
+                    // Second tap swaps the two pieces
+                    const firstPosition = firstSelected;
+
                     [
-                        order[firstSelected],
+                        order[firstPosition],
                         order[position]
                     ] = [
                         order[position],
-                        order[firstSelected]
+                        order[firstPosition]
                     ];
 
                     firstSelected = null;
+
                     renderPieces();
                     updateProgress();
                 });
@@ -264,7 +321,17 @@ function startPapaHorizontalPuzzle() {
         renderPieces();
         updateProgress();
     };
+
+    image.onerror = () => {
+        message.textContent =
+            "The photo couldn't load. Check that IMG_20261009_164236_022~2.jpg is beside index.html.";
+        progressText.textContent = "Photo not loaded";
+        console.error("Could not load puzzle photo:", photoPath);
+    };
+
+    image.src = photoPath;
 }
+
 
 function addPapaGyaanStyles() {
     if (document.getElementById("pgGyaanStyles")) return;
@@ -276,7 +343,6 @@ function addPapaGyaanStyles() {
       #papaGyaanScene {
         --pg-ink: #704d55;
         --pg-muted: #987782;
-        --pg-pink: #e9a9bd;
         position: relative;
         isolation: isolate;
         overflow: hidden;
@@ -291,7 +357,9 @@ function addPapaGyaanStyles() {
         text-align: center;
       }
 
-      #papaGyaanScene * { box-sizing: border-box; }
+      #papaGyaanScene * {
+        box-sizing: border-box;
+      }
 
       #papaGyaanScene .pg-content {
         position: relative;
@@ -359,56 +427,64 @@ function addPapaGyaanStyles() {
       }
 
       #papaGyaanScene .pg-photo-frame {
+        width: 100%;
         padding: 8px;
         border-radius: 17px;
         background: #fff;
         box-shadow: 0 5px 20px rgba(115,75,92,.1);
       }
 
+      /* Portrait frame follows the image's natural ratio */
       #papaGyaanScene .pg-puzzle {
         display: grid;
-        grid-template-columns: repeat(var(--pg-cols), minmax(0, 1fr));
-        grid-template-rows: repeat(var(--pg-rows), auto);
-        gap: 3px;
+        grid-template-columns:
+          repeat(var(--pg-cols), minmax(0, 1fr));
+        grid-template-rows:
+          repeat(var(--pg-rows), minmax(0, 1fr));
+        gap: 0;
+        width: 100%;
         overflow: hidden;
         border-radius: 10px;
-        aspect-ratio: 4 / 3;
+        background: #fff;
       }
 
+      /* No gaps, borders or lines between photo pieces */
       #papaGyaanScene .pg-piece {
+        display: block;
+        width: 100%;
+        height: 100%;
         min-width: 0;
         min-height: 0;
-        aspect-ratio: 1.25 / 1;
-        border: 2px solid rgba(255,255,255,.8);
-        border-radius: 5px;
+        margin: 0;
         padding: 0;
-        cursor: pointer;
+        border: 0;
+        border-radius: 0;
+        outline: none;
         background-repeat: no-repeat;
-        transition:
-          transform .25s ease,
-          box-shadow .25s ease,
-          filter .25s ease;
+        cursor: pointer;
         touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        transition:
+          filter .2s ease,
+          box-shadow .2s ease;
       }
 
       #papaGyaanScene .pg-piece:focus-visible {
-        outline: 3px solid #bf7892;
-        outline-offset: 1px;
+        position: relative;
+        z-index: 2;
+        outline: 2px solid #bf7892;
+        outline-offset: -2px;
       }
 
       #papaGyaanScene .pg-piece-selected {
+        position: relative;
         z-index: 1;
-        transform: scale(.94);
-        box-shadow: 0 0 0 3px #df9bb3, 0 0 18px #efbfd0;
-        filter: brightness(1.08);
-      }
-
-      #papaGyaanScene .pg-piece-correct {
-        border-color: rgba(255,255,255,.4);
+        box-shadow: inset 0 0 0 3px #df9bb3;
+        filter: brightness(1.12);
       }
 
       #papaGyaanScene .pg-solved .pg-piece {
-        animation: pgCelebrate .55s ease both;
+        animation: pgCelebrate .45s ease both;
       }
 
       #papaGyaanScene .pg-message {
@@ -439,9 +515,13 @@ function addPapaGyaanStyles() {
         font: 11px system-ui, sans-serif;
       }
 
-      #papaGyaanScene [hidden] { display: none !important; }
+      #papaGyaanScene [hidden] {
+        display: none !important;
+      }
 
-      #papaGyaanScene .pg-voice-panel { text-align: left; }
+      #papaGyaanScene .pg-voice-panel {
+        text-align: left;
+      }
 
       #papaGyaanScene .pg-voice-panel > .pg-eyebrow,
       #papaGyaanScene .pg-voice-panel > .pg-reveal-title,
@@ -473,6 +553,7 @@ function addPapaGyaanStyles() {
         display: flex;
         gap: 13px;
         align-items: flex-start;
+        min-width: 0;
         padding: 16px;
         border: 1px solid #f3e1e8;
         border-radius: 18px;
@@ -507,6 +588,7 @@ function addPapaGyaanStyles() {
         margin: 2px 0 6px;
         font-size: 17px;
         line-height: 1.3;
+        overflow-wrap: anywhere;
       }
 
       #papaGyaanScene .pg-voice-copy p {
@@ -528,10 +610,15 @@ function addPapaGyaanStyles() {
         font: italic 14px/1.7 Georgia, serif;
       }
 
+      #papaGyaanScene .pg-back-wrap {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
       #papaGyaanScene .pg-back-button {
         display: inline-block;
         min-height: 44px;
-        margin-top: 12px;
         padding: 11px 20px;
         border: 1px solid #ebcad7;
         border-radius: 30px;
@@ -539,6 +626,7 @@ function addPapaGyaanStyles() {
         background: rgba(255,255,255,.8);
         font: 13px system-ui, sans-serif;
         cursor: pointer;
+        touch-action: manipulation;
       }
 
       #papaGyaanScene .pg-back-button:active {
@@ -555,14 +643,20 @@ function addPapaGyaanStyles() {
       }
 
       @keyframes pgRise {
-        from { opacity: 0; transform: translateY(18px); }
-        to { opacity: 1; transform: translateY(0); }
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       @keyframes pgCelebrate {
-        0% { transform: scale(.94); }
-        55% { transform: scale(1.04); }
-        100% { transform: scale(1); }
+        0% { filter: brightness(1); }
+        50% { filter: brightness(1.08); }
+        100% { filter: brightness(1); }
       }
 
       @keyframes pgHeartbeat {
