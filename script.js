@@ -1296,55 +1296,50 @@ function addPartyStyles() {
        15 FLOATING LANTERNS
     ========================= */
 
-    .sky-lanterns {
-        position: absolute;
-        inset: 0;
-        z-index: 5;
-        pointer-events: auto;
-    }
+    
+.sky-lanterns {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: auto;
+}
 
+/* BEAUTIFUL FLOATING SKY LANTERNS */
+.lantern {
+    position: absolute;
+    bottom: -90px;
+    width: 34px;
+    height: 48px;
+    opacity: 1;
+    animation: lanternRise linear infinite;
+    cursor: pointer;
+    touch-action: manipulation;
+}
 
-    .lantern {
-        position: absolute;
+/* Rounded paper body */
+.lantern-body {
+    position: absolute;
+    left: 4px;
+    top: 9px;
+    width: 26px;
+    height: 34px;
 
-        bottom: -90px;
+    border-radius: 45% 45% 40% 40% / 22% 22% 30% 30%;
 
-        width: 30px;
-        height: 42px;
+    background: linear-gradient(
+        to right,
+        #d98543 0%,
+        #ffca78 22%,
+        #fff0c2 50%,
+        #ffc16a 78%,
+        #d98543 100%
+    );
 
-        opacity: 1 !important;
-animation: lanternRise linear infinite;
-
-            cursor: pointer;
-touch-action: manipulation;
-
-    }
-
-
-    .lantern-body {
-        position: absolute;
-
-        left: 3px;
-        top: 5px;
-
-        width: 24px;
-        height: 32px;
-
-        border-radius:
-            7px 7px 5px 5px;
-
-        background:
-            linear-gradient(
-                to bottom,
-                #fff0bb,
-                #ffc96d,
-                #e78d4e
-            );
-
-        box-shadow:
-            0 0 12px rgba(255,194,105,.65),
-            0 0 30px rgba(255,177,87,.35);
-    }
+    box-shadow:
+        0 0 9px rgba(255, 198, 115, 0.8),
+        0 0 24px rgba(255, 174, 91, 0.4),
+        inset 0 0 6px rgba(255, 255, 225, 0.65);
+}
 
 
     .lantern-top {
@@ -1647,7 +1642,7 @@ touch-action: manipulation;
 
 .party-table {
     position: absolute;
-    left: 47%;
+    left: 50%;
     bottom: 8%;
     width: 180px;
     height: 125px;
