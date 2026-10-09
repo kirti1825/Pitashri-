@@ -41,9 +41,8 @@ function startPapaScrapbook() {
                 <p>Some moments deserve to stay forever.</p>
                 <div class="scrapbook-count">8 SPECIAL MEMORIES</div>
             </header>
-
-            <div class="scrapbook-gallery">
-            onclick="openPapaPhoto(event)">
+<div class="scrapbook-gallery" onclick="openPapaPhoto(event)">
+            
                 ${photos.map((photo, index) => `
                     <figure class="scrapbook-photo">
                         <img
