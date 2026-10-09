@@ -75,7 +75,7 @@ function startPapaGyaanScene() {
 
                   <audio controls preload="none"
                          aria-label="M Square voice note">
-                    <source src="voice-notes/m-square.mp3"
+                    <source src="m-square.mp3"
                             type="audio/mpeg">
                     Your browser does not support audio.
                   </audio>
@@ -92,7 +92,7 @@ function startPapaGyaanScene() {
                   <audio controls preload="none"
                          aria-label="First Deserve, Then Desire voice note">
                     <source
-                      src="voice-notes/first-deserve-then-desire.mp3"
+                      src="first-deserve-then-desire.mp3"
                       type="audio/mpeg">
                     Your browser does not support audio.
                   </audio>
@@ -108,7 +108,7 @@ function startPapaGyaanScene() {
 
                   <audio controls preload="none"
                          aria-label="Shayari voice note">
-                    <source src="voice-notes/shayari.mp3"
+                    <source src="shayari.mp3"
                             type="audio/mpeg">
                     Your browser does not support audio.
                   </audio>
