@@ -233,3 +233,38 @@ body {
         opacity: 0.7;
     }
 }
+
+/* 💗 Creator credit on the welcome screen */
+.creator-credit {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 14px 12px 20px;
+    text-align: center;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.creator-credit-line {
+    color: #e8b8cd;
+    font-size: 12px;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+
+.creator-credit-name {
+    color: #ffc5df;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.7px;
+    text-shadow: 0 0 8px rgba(255, 160, 205, 0.4);
+}
+
+.creator-credit-copyright {
+    color: #d6b5c7;
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+}
